@@ -1,4 +1,5 @@
 
+
 # This is the server logic for a Shiny web application.
 # You can find out more about building applications with Shiny here:
 #
@@ -20,31 +21,35 @@ source("server_helpers/make_map.R")
 
 ############################################## READ IN REQUIRED DATA FRAMES ####################################################
 
-#' (1) read in raw data from "raw_data.csv" 
-#' @description 
-raw_anon_data <- read.csv("Data/raw_data.csv", header = TRUE,
+#' (1) read in raw data from "raw_data.csv"
+#' @description
+raw_anon_data <- read.csv("Data/raw_data.csv",
+                          header = TRUE,
                           stringsAsFactors = FALSE)
 
 # ----------------------------------------------------------------------------------------------------------------------------
 
 #' (2) read in building rosters from "building_data.csv"
-#' @description 
+#' @description
 
-building_rosters <- read.csv("Data/building_data.csv", header = TRUE,
-                              stringsAsFactors = FALSE)
+building_rosters <-
+  read.csv("Data/building_data.csv",
+           header = TRUE,
+           stringsAsFactors = FALSE)
 
 # ----------------------------------------------------------------------------------------------------------------------------
 
 #' (3) read in building location data from "building_location.csv"
-#' @description  
+#' @description
 
-locations <- read.csv("Data/building_locations.csv", header = TRUE,
-             stringsAsFactors = FALSE) %>%
-             mutate(lat = as.numeric(lat), long = as.numeric(long)) ## ideally this should be done elsewhere, 
-                                                                    ## but leaving here in case it's one-off
+locations <- read.csv("Data/building_locations.csv",
+                      header = TRUE,
+                      stringsAsFactors = FALSE) %>%
+  mutate(lat = as.numeric(lat), long = as.numeric(long)) ## ideally this should be done elsewhere,
+## but leaving here in case it's one-off
 # ----------------------------------------------------------------------------------------------------------------------------
 
-#' (4) read in graduates academic performance from "data/graduates_details.RData" 
+#' (4) read in graduates academic performance from "data/graduates_details.RData"
 #' @description data set describing academic performance by race/gender from 2000-2016
 #' \describe{
 #' \item{year}{numeric, year of graduation}
@@ -67,18 +72,26 @@ graduates <- load("data/graduates_details.RData")
 
 # -------------------------------------------------MAP DATA ------------------------------------------------------------------------
 
-## get processed data for social map 
+## get processed data for social map
 map_data <- processRosters(building_rosters, locations)
 
-
 shinyServer(function(input, output) {
-  
   output$map <- renderLeaflet({
-      make_map(map_data)
+    make_map(map_data)
   })
-
+  
+  output$pie <- renderPlotly({
+    selector = input$map_shape_click$lat
+    make_pie(map_data, selector)
+  })
+  
+  output$chi <- renderPlotly({
+    selector = input$map_shape_click$lat
+    make_chi(map_data, selector)
+  })
+  
   output$academics_gender <- renderPlot({
-      getAcademicsGenderPlot(graduates)
+    getAcademicsGenderPlot(graduates)
   })
-
+  
 })

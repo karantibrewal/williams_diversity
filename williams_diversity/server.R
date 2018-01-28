@@ -7,6 +7,7 @@
 
 library(shiny)
 library(dplyr)
+library(ggplot2)
 source("server_helpers/processRosters.R")
 
 ############################################## READ IN REQUIRED DATA FRAMES ####################################################
@@ -64,15 +65,8 @@ map_data <- processRosters(building_rosters, locations)
 
 shinyServer(function(input, output) {
 
-  output$distPlot <- renderPlot({
-
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2]
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
-
+  output$academics_gender <- renderPlot({
+      getAcademicsGenderPlot()
   })
 
 })

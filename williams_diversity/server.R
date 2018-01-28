@@ -8,7 +8,15 @@
 library(shiny)
 library(dplyr)
 library(ggplot2)
+library(leaflet)
+library(RColorBrewer)
+library(DT)
+library(scales)
+library(lattice)
+library(plotly)
+library(tidyr)
 source("server_helpers/processRosters.R")
+source("server_helpers/make_map.R")
 
 ############################################## READ IN REQUIRED DATA FRAMES ####################################################
 
@@ -64,6 +72,10 @@ map_data <- processRosters(building_rosters, locations)
 
 
 shinyServer(function(input, output) {
+  
+  output$map <- renderLeaflet({
+      make_map(map_data)
+  })
 
   output$academics_gender <- renderPlot({
       getAcademicsGenderPlot(graduates)

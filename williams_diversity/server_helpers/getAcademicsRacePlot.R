@@ -18,13 +18,19 @@ getAcademicsRacePlot <- function(processed_data, year_min, year_max)
   merged_summary$percent <- merged_summary$race_total/merged_summary$total * 100
   
   merged_summary <- data.frame(merged_summary)
+  
+  white_avg <- sum(processed_data$race == "White/Black")/nrow(processed_data) * 100
+  asian_avg <- sum(processed_data$race == "Asian")/nrow(processed_data) * 100
+  hisp_avg <- sum(processed_data$race == "Hispanic")/nrow(processed_data) * 100
+  
+  
   merged_summary <- rbind(merged_summary, 
                           data.frame(class = "College Wide", race = "White/Black", 
-                                     race_total = 4306, total = 8687, percent = 80.69), 
+                                     race_total = 4306, total = 8687, percent = white_avg), 
                           data.frame(class = "College Wide", race = "Asian", 
-                                     race_total = 4372, total = 8687, percent = 12.49309),
+                                     race_total = 4372, total = 8687, percent = asian_avg),
                           data.frame(class = "College Wide", race = "Hispanic", 
-                                     race_total = 4372, total = 8687, percent = 6.82)
+                                     race_total = 4372, total = 8687, percent = hisp_avg)
                           )
   
   
@@ -35,10 +41,10 @@ getAcademicsRacePlot <- function(processed_data, year_min, year_max)
     theme(text = element_text(size = 15)) +
     ylab("Proportions") + xlab("Academic Distinction") + 
     geom_rect(aes(xmin = 6.55, xmax = 7.45, ymin = 0, ymax = 100), colour="orange", alpha = 0, size = 1.5) + 
-    geom_hline(aes(yintercept=80.69), colour="#990000", linetype="dashed", size = 1) + 
-    geom_hline(aes(yintercept=80.69 + 6.82), colour="#990000", linetype="dashed", size = 1) + 
-    scale_fill_manual(values = cols) + scale_x_discrete(limits = c("PBK", "Summa Cum Laude", "Magna Cum Laude", 
-                                                                   "Cum Laude", "Thesis", "None", "College Wide"))
+    geom_hline(aes(yintercept=white_avg), colour="#990000", linetype="dashed", size = 1) + 
+    geom_hline(aes(yintercept=white_avg + hisp_avg), colour="#990000", linetype="dashed", size = 1) + 
+    scale_fill_manual(values = cols) + scale_x_discrete(limits = c("College Wide", "Thesis","Summa Cum Laude", 
+                                                                   "PBK", "Magna Cum Laude", "Cum Laude", "None"))
   
   plot
   

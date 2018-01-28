@@ -26,7 +26,7 @@ getAcademicsTab <- function()
            fluidRow(
              plotOutput(height = 500, "academics_race"),
              alignCenter(sliderInput("grad_race_years", "Select range for graduating year:", min = 2000, max = 2016, 
-                                     value = c(2000,2016), sep = "", width = 1000))
+                                     value = c(2016,2016), sep = "", width = 1000))
            ),
            
            br(), 
@@ -36,7 +36,7 @@ getAcademicsTab <- function()
            fluidRow(
                  plotOutput(height = 500, "academics_gender"),
                  alignCenter(sliderInput("grad_gender_years", "Select range for graduating year:", min = 2000, max = 2016, 
-                                         value = c(2000,2016), sep = "", width = 1000))
+                                         value = c(2016,2016), sep = "", width = 1000))
                  )
   )
 

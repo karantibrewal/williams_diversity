@@ -9,6 +9,7 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 source("server_helpers/processRosters.R")
+source("getAcademicsGenderPlot.R")
 
 ############################################## READ IN REQUIRED DATA FRAMES ####################################################
 
@@ -54,6 +55,11 @@ locations <- read.csv("Data/building_locations.csv", header = TRUE,
 graduates <- load("data/graduates_details.RData")
 
 
+#' (5) read in graduates data for the gender plot
+#' @description 
+
+graduates <- load("data/grad_gender_plot_dat.RData")
+
 
 ########################################################### PROCESS DATA   ###############################################################
 
@@ -64,9 +70,8 @@ map_data <- processRosters(building_rosters, locations)
 
 
 shinyServer(function(input, output) {
-
   output$academics_gender <- renderPlot({
-      getAcademicsGenderPlot(graduates)
+    getAcademicsGenderPlot(grad_gender_plot_dat)
   })
 
 })

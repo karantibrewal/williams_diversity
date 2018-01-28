@@ -18,6 +18,8 @@ library(plotly)
 library(tidyr)
 source("server_helpers/processRosters.R")
 source("server_helpers/make_map.R")
+source("server_helpers/make_pie.R")
+source("server_helpers/make_chi.R")
 
 ############################################## READ IN REQUIRED DATA FRAMES ####################################################
 

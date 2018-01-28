@@ -1,5 +1,3 @@
-
-
 # This is the server logic for a Shiny web application.
 # You can find out more about building applications with Shiny here:
 #
@@ -35,10 +33,9 @@ raw_anon_data <- read.csv("Data/raw_data.csv",
 #' (2) read in building rosters from "building_data.csv"
 #' @description
 
-building_rosters <-
-  read.csv("Data/building_data.csv",
-           header = TRUE,
-           stringsAsFactors = FALSE)
+building_rosters <- read.csv("Data/building_data.csv",
+                             header = TRUE,
+                             stringsAsFactors = FALSE)
 
 # ----------------------------------------------------------------------------------------------------------------------------
 
@@ -98,11 +95,13 @@ shinyServer(function(input, output) {
   })
   
   output$raw_data <- DT::renderDataTable({
-    datatable(raw_anon_data, 
-              class = 'cell-border stripe', 
-              filter = "top",
-              rownames = FALSE,
-              options = list(lengthMenu = c(5, 15, 50, 100, 1000)))
+    datatable(
+      raw_anon_data,
+      class = 'cell-border stripe',
+      filter = "top",
+      rownames = FALSE,
+      options = list(lengthMenu = c(5, 15, 50, 100, 1000))
+    )
   })
   
   output$academics_gender <- renderPlot({

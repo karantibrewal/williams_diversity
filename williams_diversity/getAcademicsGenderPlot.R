@@ -5,11 +5,12 @@
 
 getAcademicsGenderPlot <- function(processed_data)
 {
-  print("here")
   library(dplyr)
   library(ggplot2)
   library(tidyr)
-  processed_data <- dplyr::filter(processed_data, !is.na(gender))
+  print("here")
+  processed_data <- filter(processed_data, !is.na(gender))
+  
   grouped_class <- dplyr::group_by(processed_data, class) %>% dplyr::summarise(total = n())
   
   grouped_class_gender <- dplyr::group_by(processed_data, class, gender) %>% dplyr::summarise(gender_total = n())
@@ -33,7 +34,6 @@ getAcademicsGenderPlot <- function(processed_data)
     geom_hline(aes(yintercept=50.39), colour="#990000", linetype="dashed", size = 1) + 
     scale_fill_manual(values = cols)
   
-  print("done")
   plot
   
 }

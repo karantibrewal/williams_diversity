@@ -24,7 +24,7 @@ make_chi <- function(data, selector)
       y = dchisq(stat, 3),
       text = paste0(
         formatC(pval * 100, digits = 2),
-        "% chance of<br>occuring randomly."
+        "% probability of<br>occuring by chance."
       ),
       xref = "x",
       yref = "y",

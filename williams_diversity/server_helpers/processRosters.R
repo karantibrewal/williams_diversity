@@ -23,14 +23,14 @@ processRosters <- function(building_rosters, locations)
   total <- ungroup(processed_data) %>%
     summarize(
       asi = sum(p_asi),
-      his = sum(p_his),
       bla = sum(p_bla),
+      his = sum(p_his),
       whi = sum(p_whi),
       tot = sum(total)
     ) %>%
     mutate(p_asi = asi / tot,
-           p_his = his / tot,
            p_bla = bla / tot,
+           p_his = his / tot,
            p_whi = whi / tot)
   
   ## Conduct the proportion test and store the pvalues for each building

@@ -19,20 +19,21 @@ make_pie <- function(data, selector)
       x,
       label = ~ Categories,
       values = ~ Count,
-      type = "pie",
-      labels = c("Asian", "Hispanic", "Black", "White and Other"),
+      marker = list(colors = c("#4A8DB5","#F47AB0","#FFFD8D","#FFC13B")),
+      labels = c("Asian", "Black", "Hispanic", "White and Other"),
       textposition = "inside",
       textinfo = "label+percent+count",
       hoverinfo = "text",
       text = ~ paste0("Raw count: ", Count)
     ) %>%
+    add_pie(hole = 0.45)%>%
     layout(
       title = paste0('Ethinic/Racial Composition<br>of ', name),
       margin = list(
         l = 0,
         r = 0,
         b = 0,
-        t = 60
+        t = 40
       )
     )
 }

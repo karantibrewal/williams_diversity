@@ -15,6 +15,7 @@ library(lattice)
 library(plotly)
 library(tidyr)
 library(shinyWidgets)
+library(stringr)
 source("server_helpers/processRosters.R")
 source("getAcademicsGenderPlot.R")
 source("server_helpers/make_map.R")
@@ -74,32 +75,39 @@ load("data/graduates_details.RData")
 
 grad_gender_plot_dat <- read.csv("data/grad_gender_plot.csv")
 
+#' (5) read in sports data for the map tab
+#' @description 
+
+sports_data <- read.csv("data/sports.csv", header = TRUE, stringsAsFactors = FALSE)
+
 
 ########################################################### PROCESS DATA   ###############################################################
 
 # -------------------------------------------------MAP DATA ------------------------------------------------------------------------
 
 ## get processed data for social map
-map_data <- processRosters(building_rosters, locations)
+map_data_race <- processRosters(building_rosters, locations)
+#map_data_sports <- processSports(building_rosters, locations, sports_data)
+
 
 shinyServer(function(input, output) {
  
   output$map <- renderLeaflet({
-    make_map(map_data)
+    make_map(map_data_race)
   })
   
   output$pie <- renderPlotly({
-    selector = input$map_shape_click$lat
-    make_pie(map_data, selector)
+    selector = input$map_shape_mouseover$lat
+    make_pie(map_data_race, selector)
   })
   
   output$chi <- renderPlotly({
-    selector = input$map_shape_click$lat
-    make_chi(map_data, selector)
+    selector = input$map_shape_mouseover$lat
+    make_chi(map_data_race, selector)
   })
   
   output$allbar <- renderPlot({
-    make_allbar(map_data)
+    make_allbar(map_data_race)
   })
   
   output$raw_data <- DT::renderDataTable({

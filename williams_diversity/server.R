@@ -15,6 +15,7 @@ library(lattice)
 library(plotly)
 library(tidyr)
 source("server_helpers/processRosters.R")
+source("getAcademicsGenderPlot.R")
 source("server_helpers/make_map.R")
 source("server_helpers/make_pie.R")
 source("server_helpers/make_chi.R")
@@ -64,8 +65,13 @@ locations <- read.csv("Data/building_locations.csv",
 #' \item{race}{character, based on \code{last.name}, using the wru package.}
 #' }}
 
-graduates <- load("data/graduates_details.RData")
+load("data/graduates_details.RData")
 
+
+#' (5) read in graduates data for the gender plot
+#' @description 
+
+load("data/grad_gender_plot_dat.RData")
 
 
 ########################################################### PROCESS DATA   ###############################################################
@@ -76,6 +82,7 @@ graduates <- load("data/graduates_details.RData")
 map_data <- processRosters(building_rosters, locations)
 
 shinyServer(function(input, output) {
+ 
   output$map <- renderLeaflet({
     make_map(map_data)
   })
@@ -105,7 +112,7 @@ shinyServer(function(input, output) {
   })
   
   output$academics_gender <- renderPlot({
-    getAcademicsGenderPlot(graduates)
+    getAcademicsGenderPlot(grad_gender_plot_dat)
   })
   
 })

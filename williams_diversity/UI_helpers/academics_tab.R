@@ -11,8 +11,12 @@ getAcademicsTab <- function()
              "The following data visualizations encompass data for ~9000 Williams graduates
              from 2000 onwards. It is derived from archived course catalogs published by the college."),
            
+           br(), 
+           
+           h3("Performance by Gender"),
+           
            fluidRow(
-                 plotOutput("acedmics_gender"),
+                 plotOutput("academics_gender"),
                  sliderInput("orders", "Orders", min = 1, max = 2000, value = 650)
                  )
            )

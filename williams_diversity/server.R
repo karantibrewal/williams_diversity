@@ -33,6 +33,25 @@ locations <- read.csv("Data/building_locations.csv", header = TRUE,
              stringsAsFactors = FALSE) %>%
              mutate(lat = as.numeric(lat), long = as.numeric(long)) ## ideally this should be done elsewhere, 
                                                                     ## but leaving here in case it's one-off
+# ----------------------------------------------------------------------------------------------------------------------------
+
+#' (4) read in graduates academic performance from "data/graduates_details.RData" 
+#' @description data set describing academic performance by race/gender from 2000-2016
+#' \describe{
+#' \item{year}{numeric, year of graduation}
+#' \item{first.name}{character, first name of graduate}
+#' \item{last.name}{character, last name of graduate}
+#' \item{latin.honors}{character, Latin Honors recieved by graduate (if any)}
+#' \item{Phi.Beta.Kappa}{lgical, indicates Phi Beta Kappa membership}
+#' \item{Sigma.Xi}{lgical, indicates Sigma Xi membership}
+#' \item{honor}{character, first department honor awarded, if any.}
+#' \item{major}{character, academic field in which graduate won primary honor.}
+#' \item{gender}{character, based on \code{first.name}, using the gender package.}
+#' \item{race}{character, based on \code{last.name}, using the wru package.}
+#' }}
+
+graduates <- load("data/graduates_details.RData")
+
 
 
 ########################################################### PROCESS DATA   ###############################################################

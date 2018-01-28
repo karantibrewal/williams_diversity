@@ -20,6 +20,7 @@ source("server_helpers/processRosters.R")
 source("server_helpers/make_map.R")
 source("server_helpers/make_pie.R")
 source("server_helpers/make_chi.R")
+source("server_helpers/make_allbar.R")
 
 ############################################## READ IN REQUIRED DATA FRAMES ####################################################
 
@@ -90,6 +91,18 @@ shinyServer(function(input, output) {
   output$chi <- renderPlotly({
     selector = input$map_shape_click$lat
     make_chi(map_data, selector)
+  })
+  
+  output$allbar <- renderPlot({
+    make_allbar(map_data)
+  })
+  
+  output$raw_data <- DT::renderDataTable({
+    datatable(raw_anon_data, 
+              class = 'cell-border stripe', 
+              filter = "top",
+              rownames = FALSE,
+              options = list(lengthMenu = c(5, 15, 50, 100, 1000)))
   })
   
   output$academics_gender <- renderPlot({

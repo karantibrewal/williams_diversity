@@ -10,6 +10,8 @@ library(ggplot2)
 source("UI_helpers/map_tab.R")
 source("UI_helpers/academics_tab.R")
 source("UI_helpers/positions_of_power_tab.R")
+source("UI_helpers/data_and_analysis_tab.R")
+source("UI_helpers/about_tab.R")
 
 
 navbarPage(
@@ -18,6 +20,8 @@ navbarPage(
   
   getMapTab(),
   getAcademicsTab(), 
-  getPositionsOfPowerTab()
+  getPositionsOfPowerTab(),
+  getDataAndAnalysisTab(),
+  getAboutTab()
   
 )

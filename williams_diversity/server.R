@@ -17,7 +17,8 @@ library(tidyr)
 library(shinyWidgets)
 library(stringr)
 source("server_helpers/processRosters.R")
-source("getAcademicsGenderPlot.R")
+source("server_helpers/getAcademicsGenderPlot.R")
+source("server_helpers/getAcademicsRacePlot.R")
 source("server_helpers/make_map.R")
 source("server_helpers/make_pie.R")
 source("server_helpers/make_chi.R")
@@ -73,7 +74,7 @@ load("data/graduates_details.RData")
 #' (5) read in graduates data for the gender plot
 #' @description 
 
-grad_gender_plot_dat <- read.csv("data/grad_gender_plot.csv")
+grad_plot <- read.csv("data/grad_plot.csv")
 
 #' (5) read in sports data for the map tab
 #' @description 
@@ -121,7 +122,11 @@ shinyServer(function(input, output) {
   })
   
   output$academics_gender <- renderPlot({
-    getAcademicsGenderPlot(grad_gender_plot_dat, input$grad_gender_years[1], input$grad_gender_years[2])
+    getAcademicsGenderPlot(grad_plot, input$grad_gender_years[1], input$grad_gender_years[2])
+  })
+  
+  output$academics_race <- renderPlot({
+    getAcademicsRacePlot(grad_plot, input$grad_race_years[1], input$grad_race_years[2])
   })
   
 })

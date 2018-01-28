@@ -3,13 +3,12 @@
 #'              with one bar each for PBK, Latin Honors - (Suma, Magna, Cum), Theses, and then "other"
 
 
-getAcademicsGenderPlot <- function(processed_data)
+getAcademicsGenderPlot <- function(processed_data, year_min, year_max)
 {
   library(dplyr)
   library(ggplot2)
   library(tidyr)
-  print("here")
-  processed_data <- filter(processed_data, !is.na(gender))
+  processed_data <- filter(processed_data, !is.na(gender) & year >= year_min & year <= year_max)
   
   grouped_class <- dplyr::group_by(processed_data, class) %>% dplyr::summarise(total = n())
   
@@ -24,19 +23,23 @@ getAcademicsGenderPlot <- function(processed_data)
                           data.frame(class = "College Wide", gender = "female", 
                                      gender_total = 4372, total = 8687, percent = 50.39))
   
+
   cols = c(male = "#512698", female = "#fdcc09")
   plot <- ggplot(merged_summary, aes(class)) + 
     geom_bar(aes(fill = gender, weight = percent)) + 
     theme_bw() +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    theme(text = element_text(size = 15)) +
     ylab("Proportions") + xlab("Academic Distinction") + 
-    geom_rect(aes(xmin = 6.6, xmax = 7.4, ymin = 0, ymax = 100), colour="orange", alpha = 0, size = 1.0) + 
-    geom_hline(aes(yintercept=50.39), colour="#990000", linetype="dashed", size = 1) + 
-    scale_fill_manual(values = cols)
+    geom_rect(aes(xmin = 6.55, xmax = 7.45, ymin = 0, ymax = 100), colour="orange", alpha = 0, size = 1.5) + 
+    geom_hline(aes(yintercept=50), colour="#990000", linetype="dashed", size = 1.5) + 
+    scale_fill_manual(values = cols) + scale_x_discrete(limits = c("PBK", "Summa Cum Laude", "Magna Cum Laude", 
+                                                                   "Cum Laude", "Thesis", "None", "College Wide"))
   
   plot
   
 }
+
+
 
 
 

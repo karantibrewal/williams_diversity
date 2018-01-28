@@ -71,7 +71,7 @@ load("data/graduates_details.RData")
 #' (5) read in graduates data for the gender plot
 #' @description 
 
-load("data/grad_gender_plot_dat.RData")
+grad_gender_plot_dat <- read.csv("data/grad_gender_plot.csv")
 
 
 ########################################################### PROCESS DATA   ###############################################################
@@ -112,7 +112,8 @@ shinyServer(function(input, output) {
   })
   
   output$academics_gender <- renderPlot({
-    getAcademicsGenderPlot(grad_gender_plot_dat)
+    getAcademicsGenderPlot(grad_gender_plot_dat, input$grad_gender_years[1], input$grad_gender_years[2])
   })
   
 })
+

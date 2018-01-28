@@ -66,7 +66,7 @@ map_data <- processRosters(building_rosters, locations)
 shinyServer(function(input, output) {
 
   output$academics_gender <- renderPlot({
-      getAcademicsGenderPlot()
+      getAcademicsGenderPlot(graduates)
   })
 
 })

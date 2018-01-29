@@ -1,0 +1,12 @@
+name: williams_diversity
+title: williams_diversity
+username:
+account: m466project
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 264487
+bundleId: 1197018
+url: https://m466project.shinyapps.io/williams_diversity/
+when: 1517184795.42624
+asMultiple: FALSE
+asStatic: FALSE

@@ -27,7 +27,7 @@ getAcademicsGenderPlot <- function(processed_data, year_min, year_max)
                                     "College Wide"  ) 
   
 
-  cols = c(male = "#512698", female = "#fdcc09")
+  cols = c(male = "#FFC13B", female = "#4A8DB5")
   plot <- ggplot(merged_summary, aes(class)) + 
     geom_bar(aes(fill = gender, weight = percent)) + 
     theme_bw() +

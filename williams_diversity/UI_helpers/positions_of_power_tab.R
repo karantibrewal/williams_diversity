@@ -4,5 +4,5 @@
 getPositionsOfPowerTab <- function()
 {
   tabPanel("Positions of Power", 
-           h3("test-3"))
+           h3("under construction..."))
 }

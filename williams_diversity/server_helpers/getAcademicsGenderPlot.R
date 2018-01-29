@@ -23,6 +23,9 @@ getAcademicsGenderPlot <- function(processed_data, year_min, year_max)
                           data.frame(class = "College Wide", gender = "female", 
                                      gender_total = 4372, total = 8687, percent = 50.39))
   
+  levels(merged_summary$class) <- c("Cum Laude\n(Top 30%)",       "Magna Cum Laude\n(Top 15%)", "None"   ,         "PBK\n(Top 12.5%)"     ,        "Summa Cum Laude\n(Top 2%)", "Thesis"   ,      
+                                    "College Wide"  ) 
+  
 
   cols = c(male = "#512698", female = "#fdcc09")
   plot <- ggplot(merged_summary, aes(class)) + 
@@ -30,10 +33,11 @@ getAcademicsGenderPlot <- function(processed_data, year_min, year_max)
     theme_bw() +
     theme(text = element_text(size = 15)) +
     ylab("Proportions") + xlab("Academic Distinction") + 
-    geom_rect(aes(xmin = 6.55, xmax = 7.45, ymin = 0, ymax = 100), colour="orange", alpha = 0, size = 1.5) + 
+    geom_rect(aes(xmin = 0.55, xmax = 1.45, ymin = 0, ymax = 100), colour="orange", alpha = 0, size = 1.5) + 
     geom_hline(aes(yintercept=50), colour="#990000", linetype="dashed", size = 1.5) + 
-    scale_fill_manual(values = cols) + scale_x_discrete(limits = c("College Wide", "Thesis","Summa Cum Laude", 
-                                                                   "PBK", "Magna Cum Laude", "Cum Laude", "None"))
+    scale_fill_manual(values = cols) + scale_x_discrete(limits = c("College Wide", "Thesis","Summa Cum Laude\n(Top 2%)", 
+                                                                   "PBK\n(Top 12.5%)", "Magna Cum Laude\n(Top 15%)", "Cum Laude\n(Top 30%)", "None"))
+  
   
   plot
   

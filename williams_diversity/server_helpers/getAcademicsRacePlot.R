@@ -8,6 +8,7 @@ getAcademicsRacePlot <- function(processed_data, year_min, year_max)
   library(dplyr)
   library(ggplot2)
   library(tidyr)
+  library(gdata)
   processed_data <- filter(processed_data, !is.na(race) & year >= year_min & year <= year_max & race != "None")
   
   
@@ -17,7 +18,7 @@ getAcademicsRacePlot <- function(processed_data, year_min, year_max)
   merged_summary <- left_join(grouped_class_race, grouped_class, by = "class")
   merged_summary$percent <- merged_summary$race_total/merged_summary$total * 100
   
-  merged_summary <- data.frame(merged_summary)
+  merged_summary <- data.frame(merged_summary, stringsAsFactors = F)
   
   white_avg <- sum(processed_data$race == "White/Black")/nrow(processed_data) * 100
   asian_avg <- sum(processed_data$race == "Asian")/nrow(processed_data) * 100
@@ -33,18 +34,20 @@ getAcademicsRacePlot <- function(processed_data, year_min, year_max)
                                      race_total = 4372, total = 8687, percent = hisp_avg)
                           )
   
-  
+  levels(merged_summary$class) <- c("Cum Laude\n(Top 30%)",       "Magna Cum Laude\n(Top 15%)", "None"   ,         "PBK\n(Top 12.5%)"     ,        "Summa Cum Laude\n(Top 2%)", "Thesis"   ,      
+                                    "College Wide"  ) 
+
   cols = c("White/Black" = "#FFC13B", "Asian" = "#4A8DB5", "Hispanic" = "#FFFD8D")
   plot <- ggplot(merged_summary, aes(class)) + 
     geom_bar(aes(fill = race, weight = percent)) + 
     theme_bw() +
     theme(text = element_text(size = 15)) +
     ylab("Proportions") + xlab("Academic Distinction") + 
-    geom_rect(aes(xmin = 6.55, xmax = 7.45, ymin = 0, ymax = 100), colour="orange", alpha = 0, size = 1.5) + 
+    geom_rect(aes(xmin = 0.55, xmax = 1.45, ymin = 0, ymax = 100), colour="orange", alpha = 0, size = 1.5) + 
     geom_hline(aes(yintercept=white_avg), colour="#990000", linetype="dashed", size = 1) + 
     geom_hline(aes(yintercept=white_avg + hisp_avg), colour="#990000", linetype="dashed", size = 1) + 
-    scale_fill_manual(values = cols) + scale_x_discrete(limits = c("College Wide", "Thesis","Summa Cum Laude", 
-                                                                   "PBK", "Magna Cum Laude", "Cum Laude", "None"))
+    scale_fill_manual(values = cols) + scale_x_discrete(limits = c("College Wide", "Thesis","Summa Cum Laude\n(Top 2%)", 
+                                                                   "PBK\n(Top 12.5%)", "Magna Cum Laude\n(Top 15%)", "Cum Laude\n(Top 30%)", "None"))
   
   plot
   

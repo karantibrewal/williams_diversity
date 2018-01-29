@@ -29,7 +29,7 @@ source("server_helpers/make_allbar.R")
 
 #' (1) read in raw data from "raw_data.csv"
 #' @description
-raw_anon_data <- read.csv("Data/raw_data.csv",
+raw_anon_data <- read.csv("data/raw_data.csv",
                           header = TRUE,
                           stringsAsFactors = FALSE)
 
@@ -38,7 +38,7 @@ raw_anon_data <- read.csv("Data/raw_data.csv",
 #' (2) read in building rosters from "building_data.csv"
 #' @description
 
-building_rosters <- read.csv("Data/building_data.csv",
+building_rosters <- read.csv("data/building_data.csv",
                              header = TRUE,
                              stringsAsFactors = FALSE)
 
@@ -47,7 +47,7 @@ building_rosters <- read.csv("Data/building_data.csv",
 #' (3) read in building location data from "building_location.csv"
 #' @description
 
-locations <- read.csv("Data/building_locations.csv",
+locations <- read.csv("data/building_locations.csv",
                       header = TRUE,
                       stringsAsFactors = FALSE) %>%
   mutate(lat = as.numeric(lat), long = as.numeric(long)) ## ideally this should be done elsewhere,

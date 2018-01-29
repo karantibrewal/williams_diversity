@@ -1,0 +1,12 @@
+name: diversity
+title: diversity
+username:
+account: modelmaker
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 259078
+bundleId: 1197219
+url: https://modelmaker.shinyapps.io/diversity/
+when: 1517203800.7322
+asMultiple: FALSE
+asStatic: FALSE

@@ -15,27 +15,6 @@ make_map <- function(data)
     addCircles(
       ~ long,
       ~ lat,
-      popup = ~ paste(
-        paste0("<b>Ethinic/Racial Composition</b>"),
-        paste0(
-          "Percent White and Other: ",
-          formatC(100 * p_whi / total, digits = 3),
-          "%"
-        ),
-        paste0(
-          "Percent Black: ",
-          formatC(100 * p_bla / total, digits = 3),
-          "%"
-        ),
-        paste0(
-          "Percent Hispanic: ",
-          formatC(100 * p_his / total, digits = 3),
-          "%"
-        ),
-        paste0("Percent Asian: ", formatC(100 *
-                                            p_asi / total, digits = 3), "%"),
-        sep = "<br/>"
-      ),
       label = ~ as.character(Building),
       radius = ~ total ^ (1 / 2) * 2,
       color = ~ pal(pval),
@@ -44,7 +23,7 @@ make_map <- function(data)
     addLegend(
       "bottomleft",
       values = ~ pval,
-      title = "How likely is this to<br>happen randomly?",
+      title = "Probability of<br>happening by chance",
       colors = c("#D7191C", "#FDAE61", "#A6D96A", "#1A9641"),
       labels = c("Super Unlikely", "Very Unlikely", "Unlikely", "Likely")
     )

@@ -17,6 +17,7 @@ library(tidyr)
 library(shinyWidgets)
 library(stringr)
 source("server_helpers/processRosters.R")
+source("server_helpers/processSports.R")
 source("server_helpers/getAcademicsGenderPlot.R")
 source("server_helpers/getAcademicsRacePlot.R")
 source("server_helpers/make_map.R")
@@ -79,7 +80,7 @@ grad_plot <- read.csv("data/grad_plot.csv")
 #' (5) read in sports data for the map tab
 #' @description 
 
-sports_data <- read.csv("data/sports.csv", header = TRUE, stringsAsFactors = FALSE)
+sport_data <- read.csv("data/sport_data.csv", header = TRUE, stringsAsFactors = FALSE)
 
 
 ########################################################### PROCESS DATA   ###############################################################
@@ -88,23 +89,40 @@ sports_data <- read.csv("data/sports.csv", header = TRUE, stringsAsFactors = FAL
 
 ## get processed data for social map
 map_data_race <- processRosters(building_rosters, locations)
-#map_data_sports <- processSports(building_rosters, locations, sports_data)
+map_data_sports <- processSports(sport_data, locations)
 
 
 shinyServer(function(input, output) {
- 
+  
   output$map <- renderLeaflet({
-    make_map(map_data_race)
+    if(input$categorizer == "Race"){
+      data <- map_data_race
+    }else{
+      data <- map_data_sports
+    }
+    make_map(data)
   })
   
   output$pie <- renderPlotly({
-    selector = input$map_shape_mouseover$lat
-    make_pie(map_data_race, selector)
+    if(input$categorizer == "Race"){
+      data <- map_data_race
+    }else{
+      data <- map_data_sports
+    }
+    categorizer <- input$categorizer
+    selector <- input$map_shape_mouseover$lat
+    make_pie(data, selector, categorizer)
   })
   
   output$chi <- renderPlotly({
-    selector = input$map_shape_mouseover$lat
-    make_chi(map_data_race, selector)
+    if(input$categorizer == "Race"){
+      data <- map_data_race
+    }else{
+      data <- map_data_sports
+    }
+    categorizer <- input$categorizer
+    selector <- input$map_shape_mouseover$lat
+    make_chi(data, selector)
   })
   
   output$allbar <- renderPlot({

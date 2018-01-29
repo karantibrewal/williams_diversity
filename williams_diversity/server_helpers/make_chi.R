@@ -20,7 +20,7 @@ make_chi <- function(data, selector)
     stat <- qchisq(1 - pval, 3)
     y5 <- ifelse(x >= stat, dchisq(x, 3), 0)
     a <- list(
-      x = stat,
+      x = ifelse(stat == "Inf", 70, stat),
       y = dchisq(stat, 3),
       text = paste0(
         formatC(pval * 100, digits = 2),
@@ -44,10 +44,8 @@ make_chi <- function(data, selector)
     fill = "tozeroy",
     fillcolor = "#1A9641",
     line = list(color = "#1A9641"),
-    autosize = F,
-    height = 200,
-    width = 300,
-    hoverinfo = "none"
+    hoverinfo = "none",
+    name = "Likely"
   ) %>%
     add_trace(
       y = ~ y2,
@@ -55,7 +53,8 @@ make_chi <- function(data, selector)
       mode = "line",
       fill = "tozeroy",
       fillcolor = "#A6D96A",
-      line = list(color = "#A6D96A")
+      line = list(color = "#A6D96A"),
+      name = "Unlikely"
     ) %>%
     add_trace(
       y = ~ y3,
@@ -63,7 +62,8 @@ make_chi <- function(data, selector)
       mode = "line",
       fill = "tozeroy",
       fillcolor = "#FDAE61",
-      line = list(color = "#FDAE61")
+      line = list(color = "#FDAE61"),
+      name = "Very Unlikely"
     ) %>%
     add_trace(
       y = ~ y4,
@@ -71,7 +71,8 @@ make_chi <- function(data, selector)
       mode = "line",
       fill = "tozeroy",
       fillcolor = "#D7191C",
-      line = list(color = "#D7191C")
+      line = list(color = "#D7191C"),
+      name = "Super Unlikely"
     ) %>%
     add_trace(
       y = ~ y5,
@@ -79,17 +80,23 @@ make_chi <- function(data, selector)
       mode = "line",
       fill = "tozeroy",
       fillcolor = "#A64BC6",
-      line = list(color = "#A64BC6")
+      line = list(color = "#A64BC6"),
+      showlegend = FALSE
     ) %>%
     layout(
-      showlegend = FALSE,
-      xaxis = list(title = "Test Statistic"),
+      legend = list(orientation = "h",   # show entries horizontally
+                    xanchor = "center",  # use center of legend as anchor
+                    x = 0.5),
+      xaxis = list(title = ""),
       yaxis = list(title = ""),
-      title = "Probability of Random Occurance",
+      title = "Probability of Happening<br>by Chance",
+      autosize = F,
+      height = 260,
+      width = 300,
       margin = list(
         l = 20,
-        r = 20,
-        b = 40,
+        r = 15,
+        b = 60,
         t = 50
       ),
       annotations = a

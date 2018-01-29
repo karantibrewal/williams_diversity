@@ -38,7 +38,8 @@ getAboutTab <- function()
                h3("Contact"),
                div("Gabriella Carmona: ", code("gnc1@williams.edu")),
                div("Arjun Kakkar: ", code("ak23@williams.edu")),
-               div("Karan Tibrewal", code("kt3@williams.edu"))
+               div("Karan Tibrewal", code("kt3@williams.edu")),
+               div("Tarun Yadav", code("ty2@williams.edu"))
              )
                ))
 }

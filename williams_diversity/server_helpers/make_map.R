@@ -19,12 +19,5 @@ make_map <- function(data)
       radius = ~ total ^ (1 / 2) * 2,
       color = ~ pal(pval),
       opacity = 0.7
-    ) %>%
-    addLegend(
-      "bottomleft",
-      values = ~ pval,
-      title = "Probability of<br>happening by chance",
-      colors = c("#D7191C", "#FDAE61", "#A6D96A", "#1A9641"),
-      labels = c("Super Unlikely", "Very Unlikely", "Unlikely", "Likely")
     )
 }

@@ -61,7 +61,7 @@ make_pie <- function(input_data, selector, categorizer)
         textposition = "inside",
         textinfo = "label+percent+count",
         hoverinfo = "text",
-        text = ~ paste0("Raw count: ", Count)
+        text = ~ paste0(Categories,": ", Count)
       ) %>%
       add_pie(hole = 0.45)%>%
       layout(

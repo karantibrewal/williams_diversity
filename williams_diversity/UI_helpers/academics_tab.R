@@ -11,7 +11,7 @@ alignCenter <- function(el) {
 
 getAcademicsTab <- function()
 {
-  tabPanel("Academic Recognition", 
+  tabPanel("Academic Recognition",
            
            h2("Diversity in Academic Recognition"),
            

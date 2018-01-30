@@ -10,15 +10,14 @@ getMapTab <- function()
       class = "outer",
       
       tags$head(# Include our custom CSS
-        includeCSS("styles.css"),
-        includeScript("gomap.js")),
+        includeCSS("styles.css")),
       
       # If not using custom CSS, set height of leafletOutput to a number instead of percent
       leafletOutput("map", width = "100%", height = "100%"),
       
       absolutePanel(id = "controls", class = "panel panel-default", fixed = FALSE,
                     draggable = TRUE, top = 20, left = "auto", right = 20, bottom = "auto",
-                    width = 330, height = 800, style = 'opacity: 0.85; overflow-y:scroll; max-height: 800px',
+                    width = 330, height = 800, style = 'max-height: 800px',
                     p(div("Proportions by:",
                         style = "font-size:24px;")),
                     div(radioGroupButtons("categorizer", 

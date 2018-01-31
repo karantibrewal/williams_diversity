@@ -28,7 +28,7 @@ getDataAndAnalysisTab <- function()
       visualizes the representation of ethnic groups for all years accross different
       student housing on campus."
     ),
-    plotOutput("allbar"),
+    withSpinner(plotOutput("allbar")),
     p(
       "Statistical significance for a difference between each of these proportions and the
       overall proportions of the college community was calculated using 4-sample test for

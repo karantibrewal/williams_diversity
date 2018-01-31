@@ -16,6 +16,9 @@ library(plotly)
 library(tidyr)
 library(shinyWidgets)
 library(stringr)
+library(shinycssloaders)
+library(rintrojs)
+library(jsonlite)
 source("server_helpers/processRosters.R")
 source("server_helpers/processSports.R")
 source("server_helpers/getAcademicsGenderPlot.R")
@@ -73,14 +76,17 @@ load("data/graduates_details.RData")
 
 
 #' (5) read in graduates data for the gender plot
-#' @description 
+#' @description
 
 grad_plot <- read.csv("data/grad_plot.csv")
 
 #' (5) read in sports data for the map tab
-#' @description 
+#' @description
 
-sport_data <- read.csv("data/sport_data.csv", header = TRUE, stringsAsFactors = FALSE)
+sport_data <-
+  read.csv("data/sport_data.csv",
+           header = TRUE,
+           stringsAsFactors = FALSE)
 
 
 ########################################################### PROCESS DATA   ###############################################################
@@ -92,21 +98,38 @@ map_data_race <- processRosters(building_rosters, locations)
 map_data_sports <- processSports(sport_data, locations)
 
 
-shinyServer(function(input, output) {
+
+shinyServer(function(input, output, session) {
+  ################################ introduction for the map page ###########################################
+  count <- reactiveVal(0)
+  observeEvent(input$nav, {
+    if (input$nav == "Interactive map") {
+      newcount = count() + 1
+      count(newcount)
+    }
+  })
+  
+  observeEvent(count(), {
+    if (count() == 1) {
+      session$sendCustomMessage(type = 'startHelp', message = list(""))
+    }
+  })
+  
+  ################################ regular server logic ##################################################
   
   output$map <- renderLeaflet({
-    if(input$categorizer == "Race"){
+    if (input$categorizer == "Race") {
       data <- map_data_race
-    }else{
+    } else{
       data <- map_data_sports
     }
     make_map(data)
   })
   
   output$pie <- renderPlotly({
-    if(input$categorizer == "Race"){
+    if (input$categorizer == "Race") {
       data <- map_data_race
-    }else{
+    } else{
       data <- map_data_sports
     }
     categorizer <- input$categorizer
@@ -115,9 +138,9 @@ shinyServer(function(input, output) {
   })
   
   output$chi <- renderPlotly({
-    if(input$categorizer == "Race"){
+    if (input$categorizer == "Race") {
       data <- map_data_race
-    }else{
+    } else{
       data <- map_data_sports
     }
     categorizer <- input$categorizer
@@ -140,12 +163,15 @@ shinyServer(function(input, output) {
   })
   
   output$academics_gender <- renderPlot({
-    getAcademicsGenderPlot(grad_plot, input$grad_gender_years[1], input$grad_gender_years[2])
+    getAcademicsGenderPlot(grad_plot,
+                           input$grad_gender_years[1],
+                           input$grad_gender_years[2])
   })
   
   output$academics_race <- renderPlot({
-    getAcademicsRacePlot(grad_plot, input$grad_race_years[1], input$grad_race_years[2])
+    getAcademicsRacePlot(grad_plot,
+                         input$grad_race_years[1],
+                         input$grad_race_years[2])
   })
   
 })
-

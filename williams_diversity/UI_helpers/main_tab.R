@@ -1,12 +1,28 @@
 getMainTab <- function()
 {
   tabPanel("Main",
+           id = "main",
            div(
+             class = "parallax-img-container",
              class = "smooth",
              tags$head(# Include custom CSS
-               includeCSS("main.css")),
-             p(img(src='wdplogo.png', width = "500px"), align = "center", style = 'margin-top: -100px; margin-bottom: -70px'),
-             p(id = "p1",
+               includeCSS("main.css"),
+               includeScript("parallaxImg.js"),
+               includeScript("scroll.js")
+             ),
+             div(
+               img(src = 'wdplogo.png', width = "500px"),
+               align = "center",
+               style = 'margin-top: -90px; margin-bottom: -70px;'
+             ),
+             # img(src='https://www.istockphoto.com/resources/images/PhotoFTLP/img_63351521.jpg', 
+             #     class='parallax-move', 
+             #     `data-ps-z-index`="1", 
+             #     `data-ps-speed`="1", 
+             #     `data-ps-vertical-position`="3700", 
+             #     `data-ps-horizontal-position`="0"),
+             p(
+               id = "p1",
                "This project began with a simple yet elusive question - ",
                strong("What is diversity?"),
                "While college admissions brochures and
@@ -18,7 +34,8 @@ getMainTab <- function()
              ),
              br(),
              br(),
-             p(id = "p2",
+             p(
+               id = "p2",
                em(
                  "“The Office of Institutional Diversity and Equity at
                  Williams College dedicates itself to a community where all
@@ -27,15 +44,7 @@ getMainTab <- function()
                  that promote inclusion, equity, and social justice on campus and beyond.”"
                ),
                div(id = "p3", "-Williams College Office of Diversity and Equity")
-               ),
-             br(),
-             br(),
-             p(
-               h3(class = "contact", "Contact"),
-               div(class = "contact", "Gabriella Carmona: ", code("gnc1@williams.edu")),
-               div(class = "contact", "Arjun Kakkar: ", code("ak23@williams.edu")),
-               div(class = "contact", "Karan Tibrewal", code("kt3@williams.edu")),
-               div(class = "contact", "Tarun Yadav", code("ty2@williams.edu"))
-             )
-           ))
+               )
+            
+             ))
 }

@@ -91,8 +91,8 @@ make_chi <- function(data, selector)
       yaxis = list(title = ""),
       title = "Probability of Happening<br>by Chance",
       autosize = F,
-      height = 260,
-      width = 300,
+      height = 280,
+      width = 270,
       margin = list(
         l = 20,
         r = 15,

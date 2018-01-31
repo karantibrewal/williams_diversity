@@ -5,8 +5,8 @@ account: modelmaker
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 259078
-bundleId: 1198638
+bundleId: 1201560
 url: https://modelmaker.shinyapps.io/diversity/
-when: 1517280256.87511
+when: 1517427082.63236
 asMultiple: FALSE
 asStatic: FALSE

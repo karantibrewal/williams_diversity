@@ -1,7 +1,6 @@
 // initialize an introjs instance          
 var intro = introJs();
 
-
 // handler 2
 Shiny.addCustomMessageHandler("startHelp", 
 

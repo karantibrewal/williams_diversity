@@ -45,6 +45,26 @@ getMainTab <- function()
                ),
                div(id = "p3", "-Williams College Office of Diversity and Equity")
                )
+             # ,
+             # br(),
+             # br(),
+             # br(),
+             # br(),
+             # div(class = "row", style = "padding-left:150px;padding-right:150px;",
+             #     div(class = "column", 
+             #         p(h3("Diversity:"),
+             #           h5("/dəˈvərsədē,dīˈvərsədē/"), 
+             #           "the state of being diverse; variety")),
+             #     div(class = "column", 
+             #         p(h3("Equity:"),
+             #           h5("/ˈekwədē/"), 
+             #           "the quality of being fair and impartial")),
+             #     div(class = "column", 
+             #         p(h3("Inclusion:"),
+             #           h5("/inˈklo͞oZHən/"), 
+             #           "the action or state of including or of being included within a group or structure"))
+             #   
+             # )
             
              ))
 }

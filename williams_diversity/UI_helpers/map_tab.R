@@ -113,7 +113,7 @@ getMapTab <- function()
         tags$em(
           'Data compiled for a study on proportional representation at Williams College.'
         ),
-        'Gabriella Carmona, Arjun Kakkar, Karan Tiberwal and Tarun Yadav'
+        'Gabriella Carmona, Connor Dunn, Arjun Kakkar, Karan Tiberwal and Tarun Yadav'
       )
         )
         )

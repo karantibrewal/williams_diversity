@@ -8,6 +8,7 @@ getContactTab <- function()
            div(p(style = "margin-top:200px;",
              h3(class = "contact", "Contact"),
              div(class = "contact", "Gabriella Carmona: ", code("gnc1@williams.edu")),
+             div(class = "contact", "Connor Dunn: ", code("cd5@williams.edu")),
              div(class = "contact", "Arjun Kakkar: ", code("ak23@williams.edu")),
              div(class = "contact", "Karan Tibrewal", code("kt3@williams.edu")),
              div(class = "contact", "Tarun Yadav", code("ty2@williams.edu"))

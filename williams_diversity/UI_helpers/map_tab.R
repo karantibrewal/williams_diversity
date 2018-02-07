@@ -15,7 +15,11 @@ getMapTab <- function()
       class = "outer",
       
       tags$head(# Include our custom CSS
-        includeCSS("styles.css")),
+        includeCSS("styles.css"),
+          includeCSS("main.css"),
+          includeScript("parallaxImg.js"),
+          includeScript("scroll.js")
+        ),
       
       
       # introBox(
@@ -87,10 +91,11 @@ getMapTab <- function()
         div(
           `data-step` = "5",
           `data-intro` = "<center><h3>Hypothesis Testing</h3></center>
-          This test indicates <b>how likely is such a composition to occur by chance</b>.
+          We use a proportion test to calculate how likely is such a composition
+          to occur by chance.
           <br>
-          In other words, if you lined up everyone in the school and filled up the
-          house by picking randomly, how often would you see this composition?",
+          <b>In other words, if you lined up everyone in the school and filled up the
+          house by picking randomly, how often would you see this composition?</b>",
           `data-position` = 'left'
         ),
         div(

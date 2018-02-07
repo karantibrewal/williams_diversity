@@ -23,7 +23,7 @@ make_chi <- function(data, selector)
       x = ifelse(stat == "Inf", 70, stat),
       y = dchisq(stat, 3),
       text = paste0(
-        formatC(pval * 100, digits = 2),
+        formatC(round(pval * 100, 2), digits = 3),
         "% probability of<br>occuring by chance."
       ),
       xref = "x",

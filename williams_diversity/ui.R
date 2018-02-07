@@ -25,7 +25,7 @@ shinyUI(
 navbarPage(
   "Diversity at Williams College",
   id = "nav",
-  getMainTab(),
+  #getMainTab(),
   getMapTab(),
   getAcademicsTab(), 
   #getPositionsOfPowerTab(),
